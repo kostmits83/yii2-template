@@ -186,17 +186,14 @@ class User extends UserIdentity
      * user's email and password combo, otherwise we check username/password.
      * NOTE: used in LoginForm model.
      *
-     * @param  string $username Can be either username or email based on scenario.
+     * @param  string $email
      * @param  string $password
      * @param  string $scenario
      * @return bool|static
      */
-    public static function userExists($username, $password, $scenario)
+    public static function userExists($email, $password, $scenario)
     {
-        // if scenario is 'lwe', we need to check email, otherwise we check username
-        $field = ($scenario === 'lwe') ? 'email' : 'username';
-        
-        if ($user = static::findOne([$field => $username]))
+        if ($user = static::findOne(['email' => $email]))
         {
             if ($user->validatePassword($password))
             {

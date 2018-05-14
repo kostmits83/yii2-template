@@ -145,11 +145,8 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        // get setting value for 'Login With Email'
-        $lwe = Yii::$app->params['lwe'];
-
         // if 'lwe' value is 'true' we instantiate LoginForm in 'lwe' scenario
-        $model = $lwe ? new LoginForm(['scenario' => 'lwe']) : new LoginForm();
+        $model = new LoginForm();
 
         // now we can try to log in the user
         if ($model->load(Yii::$app->request->post()) && $model->login()) 

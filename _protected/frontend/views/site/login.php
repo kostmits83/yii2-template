@@ -19,12 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-        <?php //-- use email or username field depending on model scenario --// ?>
-        <?php if ($model->scenario === 'lwe'): ?>
-            <?= $form->field($model, 'email') ?>        
-        <?php else: ?>
-            <?= $form->field($model, 'username') ?>
-        <?php endif ?>
+        <?= $form->field($model, 'email') ?>
 
         <?= $form->field($model, 'password')->passwordInput() ?>
         <?= $form->field($model, 'rememberMe')->checkbox() ?>

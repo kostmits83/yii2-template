@@ -22,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         <?php ActiveForm::end(); ?>
         <?php if ($model->scenario === 'rna'): ?>
-            <div style="color:#666;margin:1em 0">
-                <i>*<?= Yii::t('app', 'We will send you an email with account activation link.') ?></i>
+            <div>
+                <p><i>*<?= Yii::t('app', 'We will send you an email with account activation link.') ?></i></p>
             </div>
         <?php endif ?>
     </div>

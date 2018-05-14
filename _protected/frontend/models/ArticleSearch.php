@@ -49,8 +49,7 @@ class ArticleSearch extends Article
 
         // this means that editor is trying to see articles
         // we will allow him to see published ones and drafts made by him
-        if ($published === true) 
-        {
+        if ($published === true) {
             $query->where(['status' => Article::STATUS_PUBLISHED]);
             $query->orWhere(['user_id' => Yii::$app->user->id]);
         }

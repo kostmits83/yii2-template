@@ -104,8 +104,7 @@ class SignupForm extends Model
         $user->status = $this->status;
 
         // if scenario is "rna" we will generate account activation token
-        if ($this->scenario === 'rna')
-        {
+        if ($this->scenario === 'rna') {
             $user->generateAccountActivationToken();
         }
 
@@ -127,4 +126,5 @@ class SignupForm extends Model
             ->setSubject('Account activation for ' . Yii::$app->name)
             ->send();
     }
+    
 }

@@ -60,7 +60,7 @@ class User extends UserIdentity
 
         // password strength rule is determined by StrengthValidator 
         // presets are located in: vendor/nenad/yii2-password-strength/presets.php
-        $strong = [['password'], StrengthValidator::className(), 'preset'=>'normal'];
+        $strong = [['password'], StrengthValidator::className(), 'preset' => 'normal'];
 
         // normal yii rule
         $normal = ['password', 'string', 'min' => 6];
@@ -155,8 +155,7 @@ class User extends UserIdentity
      */
     public static function findByPasswordResetToken($token)
     {
-        if (!static::isPasswordResetTokenValid($token)) 
-        {
+        if (!static::isPasswordResetTokenValid($token)) {
             return null;
         }
 
@@ -224,16 +223,11 @@ class User extends UserIdentity
     {
         $status = (empty($status)) ? $this->status : $status ;
 
-        if ($status === self::STATUS_DELETED)
-        {
+        if ($status === self::STATUS_DELETED) {
             return "Deleted";
-        }
-        elseif ($status === self::STATUS_NOT_ACTIVE)
-        {
+        } elseif ($status === self::STATUS_NOT_ACTIVE) {
             return "Inactive";
-        }
-        else
-        {
+        } else {
             return "Active";
         }
     }
@@ -288,8 +282,7 @@ class User extends UserIdentity
      */
     public static function isPasswordResetTokenValid($token)
     {
-        if (empty($token)) 
-        {
+        if (empty($token)) {
             return false;
         }
 

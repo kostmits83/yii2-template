@@ -126,12 +126,9 @@ class Article extends ActiveRecord
     {
         $status = (empty($status)) ? $this->status : $status ;
 
-        if ($status === self::STATUS_DRAFT)
-        {
+        if ($status === self::STATUS_DRAFT) {
             return Yii::t('app', 'Draft');
-        }
-        else
-        {
+        } else {
             return Yii::t('app', 'Published');
         }
     }
@@ -161,16 +158,11 @@ class Article extends ActiveRecord
     {
         $category = (empty($category)) ? $this->category : $category ;
 
-        if ($category === self::CATEGORY_ECONOMY)
-        {
+        if ($category === self::CATEGORY_ECONOMY) {
             return Yii::t('app', 'Economy');
-        }
-        elseif ($category === self::CATEGORY_SOCIETY)
-        {
+        } elseif ($category === self::CATEGORY_SOCIETY) {
             return Yii::t('app', 'Society');
-        }
-        else
-        {
+        } else {
             return Yii::t('app', 'Sport');
         }
     }

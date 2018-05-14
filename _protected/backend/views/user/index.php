@@ -11,17 +11,12 @@ $this->title = Yii::t('app', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-
     <h1>
-
     <?= Html::encode($this->title) ?>
-
     <span class="pull-right">
         <?= Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
     </span>         
-
     </h1>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -49,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->roleName;
                 },
                 'contentOptions'=>function($model, $key, $index, $column) {
-
                     return ['class'=>CssHelper::roleCss($model->roleName)];
                 }
             ],
@@ -79,5 +73,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ], // ActionColumn
         ], // columns
     ]); ?>
-
 </div>

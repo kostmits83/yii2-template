@@ -34,20 +34,16 @@ AppAsset::register($this);
             ]);
 
             // display Account and Users to admin+ roles
-            if (Yii::$app->user->can('admin'))
-            {
+            if (Yii::$app->user->can('admin')) {
                 $menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
                 $menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
             }
             
             // display Login page to guests of the site
-            if (Yii::$app->user->isGuest) 
-            {
+            if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
-            }
-            // display Logout to all logged in users
-            else 
-            {
+            } else {
+                // display Logout to all logged in users
                 $menuItems[] = [
                     'label' => Yii::t('app', 'Logout'). ' (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],

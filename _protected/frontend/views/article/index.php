@@ -10,13 +10,10 @@ $this->title = Yii::t('app', Yii::$app->name) .' '. Yii::t('app', 'news');
 $this->params['breadcrumbs'][] = Yii::t('app', 'Articles');
 ?>
 <div class="article-index">
-
     <h1><?= Html::encode($this->title) ?> 
         <span class="small"> - <?= Yii::t('app', 'The best news available') ?></span> 
     </h1>
-
     <hr class="top">
-
     <?= ListView::widget([
         'summary' => false,
         'dataProvider' => $dataProvider,
@@ -26,5 +23,4 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Articles');
             return $this->render('_index', ['model' => $model]);
         },
     ]) ?>
-
 </div>

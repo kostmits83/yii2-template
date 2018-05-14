@@ -65,12 +65,9 @@ class ArticleController extends FrontendController
 
         $model->user_id = Yii::$app->user->id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) 
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } 
-        else 
-        {
+        } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -90,21 +87,15 @@ class ArticleController extends FrontendController
     {
         $model = $this->findModel($id);
 
-        if (Yii::$app->user->can('updateArticle', ['model' => $model])) 
-        {
-            if ($model->load(Yii::$app->request->post()) && $model->save()) 
-            {
+        if (Yii::$app->user->can('updateArticle', ['model' => $model])) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
-            } 
-            else 
-            {
+            } else {
                 return $this->render('update', [
                     'model' => $model,
                 ]);
             }
-        }
-        else
-        {
+        } else {
             throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
         } 
     }
@@ -165,12 +156,9 @@ class ArticleController extends FrontendController
      */
     protected function findModel($id)
     {
-        if (($model = Article::findOne($id)) !== null) 
-        {
+        if (($model = Article::findOne($id)) !== null) {
             return $model;
-        } 
-        else 
-        {
+        } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }

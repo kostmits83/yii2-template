@@ -11,24 +11,18 @@ $this->title = Yii::t('app', 'Articles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-admin">
-
     <h1>
-
-    <?= Html::encode($this->title) ?>
-
-    <span class="pull-right">
-        <?= Html::a(Yii::t('app', 'Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
-    </span>  
-
+        <?= Html::encode($this->title) ?>
+        <span class="pull-right">
+            <?= Html::a(Yii::t('app', 'Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
+        </span>  
     </h1>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'summary' => false,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             //'id',
             // author
             [
@@ -64,5 +58,4 @@ $this->params['breadcrumbs'][] = $this->title;
             'header' => Yii::t('app', 'Menu')],
         ],
     ]); ?>
-
 </div>

@@ -108,15 +108,11 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) 
-        {
-            if ($model->contact(Yii::$app->params['adminEmail'])) 
-            {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->contact(Yii::$app->params['adminEmail'])) {
                 Yii::$app->session->setFlash('success', 
                     'Thank you for contacting us. We will respond to you as soon as possible.');
-            } 
-            else 
-            {
+            } else {
                 Yii::$app->session->setFlash('error', 'There was an error sending email.');
             }
 
@@ -140,8 +136,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) 
-        {
+        if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -149,22 +144,17 @@ class SiteController extends Controller
         $model = new LoginForm();
 
         // now we can try to log in the user
-        if ($model->load(Yii::$app->request->post()) && $model->login()) 
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
-        }
-        // user couldn't be logged in, because he has not activated his account
-        elseif($model->notActivated())
-        {
+        } elseif($model->notActivated()) {
+            // user couldn't be logged in, because he has not activated his account
             // if his account is not activated, he will have to activate it first
             Yii::$app->session->setFlash('error', 
                 'You have to activate your account first. Please check your email.');
 
             return $this->refresh();
-        }    
-        // account is activated, but some other errors have happened
-        else
-        {
+        } else {
+            // account is activated, but some other errors have happened
             return $this->render('login', [
                 'model' => $model,
             ]);
@@ -196,23 +186,17 @@ class SiteController extends Controller
     {
         $model = new PasswordResetRequestForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) 
-        {
-            if ($model->sendEmail()) 
-            {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 
                     'Check your email for further instructions.');
 
                 return $this->goHome();
-            } 
-            else 
-            {
+            } else {
                 Yii::$app->session->setFlash('error', 
                     'Sorry, we are unable to reset password for email provided.');
             }
-        }
-        else
-        {
+        } else {
             return $this->render('requestPasswordResetToken', [
                 'model' => $model,
             ]);
@@ -229,12 +213,9 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
-        try 
-        {
+        try {
             $model = new ResetPasswordForm($token);
-        } 
-        catch (InvalidParamException $e) 
-        {
+        } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
@@ -244,9 +225,7 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('success', 'New password was saved.');
 
             return $this->goHome();
-        }
-        else
-        {
+        } else {
             return $this->render('resetPassword', [
                 'model' => $model,
             ]);
@@ -277,30 +256,22 @@ class SiteController extends Controller
         $model = $rna ? new SignupForm(['scenario' => 'rna']) : new SignupForm();
 
         // collect and validate user data
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             // try to save user data in database
-            if ($user = $model->signup()) 
-            {
+            if ($user = $model->signup()) {
                 // if user is active he will be logged in automatically ( this will be first user )
-                if ($user->status === User::STATUS_ACTIVE)
-                {
-                    if (Yii::$app->getUser()->login($user)) 
-                    {
+                if ($user->status === User::STATUS_ACTIVE) {
+                    if (Yii::$app->getUser()->login($user)) {
                         return $this->goHome();
                     }
-                }
-                // activation is needed, use signupWithActivation()
-                else 
-                {
+                } else {
+                    // activation is needed, use signupWithActivation()
                     $this->signupWithActivation($model, $user);
 
                     return $this->refresh();
                 }            
-            }
-            // user could not be saved in database
-            else
-            {
+            } else {
+                // user could not be saved in database
                 // display error message to user
                 Yii::$app->session->setFlash('error', 
                     "We couldn't sign you up, please contact us.");
@@ -330,16 +301,13 @@ class SiteController extends Controller
     private function signupWithActivation($model, $user)
     {
         // try to send account activation email
-        if ($model->sendAccountActivationEmail($user)) 
-        {
+        if ($model->sendAccountActivationEmail($user)) {
             Yii::$app->session->setFlash('success', 
                 'Hello '.Html::encode($user->username).'. 
                 To be able to log in, you need to confirm your registration. 
                 Please check your email, we have sent you a message.');
-        }
-        // email could not be sent
-        else 
-        {
+        } else {
+            // email could not be sent
             // display error message to user
             Yii::$app->session->setFlash('error', 
                 "We couldn't send you account activation email, please contact us.");
@@ -365,23 +333,17 @@ class SiteController extends Controller
      */
     public function actionActivateAccount($token)
     {
-        try 
-        {
+        try {
             $user = new AccountActivation($token);
-        } 
-        catch (InvalidParamException $e) 
-        {
+        } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
-        if ($user->activateAccount()) 
-        {
+        if ($user->activateAccount()) {
             Yii::$app->session->setFlash('success', 
                 'Success! You can now log in. 
                 Thank you '.Html::encode($user->username).' for joining us!');
-        }
-        else
-        {
+        } else {
             Yii::$app->session->setFlash('error', 
                 ''.Html::encode($user->username).' your account could not be activated, 
                 please contact us!');

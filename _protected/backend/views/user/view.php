@@ -10,9 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
-
     <h1><?= Html::encode($this->title) ?>
-
     <div class="pull-right">
         <?= Html::a(Yii::t('app', 'Back'), ['index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], [
@@ -25,9 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </div>
-
     </h1>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -50,5 +46,4 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at:date',
         ],
     ]) ?>
-
 </div>

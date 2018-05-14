@@ -1,4 +1,4 @@
-yii2-advanced-template
+My template based on yii2-advanced-template
 ======================
 
 Yii2-advanced-template is based on yii2-app-advanced created by yii2 core developers.

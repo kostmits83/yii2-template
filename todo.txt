@@ -6,4 +6,9 @@ Config
 		common/translations
 	formatter
 	aliases
-	
+Change CRUD
+ContactMessage
+IpAccess
+UserLogin
+User
+

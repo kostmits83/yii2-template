@@ -1,0 +1,9 @@
+Formatting
+Config
+	language
+	urlManager
+	Translations
+		common/translations
+	formatter
+	aliases
+	

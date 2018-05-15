@@ -28,3 +28,10 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+
+*.data
+*.log
+/_protected/frontend/runtime/
+
+
+
